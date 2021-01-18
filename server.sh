@@ -1,4 +1,3 @@
-set CURRENTDIR=$(pwd)
 #!/bin/bash -x
 ## Update System
 sudo apt update
@@ -7,6 +6,8 @@ sudo apt -y upgrade
 sudo sh -c 'echo root:Passw0rd | chpasswd'
 ## Change Hostname
 sudo hostnamectl set-hostname Server
+## Install utilitaries
+sudo apt -y install debconf-utils
 ## Install apache 2
 sudo apt -y install apache2
 ## Enable SSl and site
@@ -93,6 +94,12 @@ cp /etc/easy-rsa/easyrsa3/pki/private/amazonaws.com.key /var/www/html
 cp /etc/easy-rsa/easyrsa3/pki/private/client.amazonaws.com.key /var/www/html
 cp /etc/easy-rsa/easyrsa3/pki/private/client.amazonaws.com.p12 /var/www/html
 ## Change permissions and remove the index
-chmod -R +r /var/www/html
-rm /var/www/html/index.html
-## 
+sudo chmod -R +r /var/www/html
+sudo rm /var/www/html/index.html
+## Install iptables
+sudo apt -y install iptables-persistent netfilter-persistent
+sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+sudo netfilter-persistent save
+## Change sysctl
+sed -i 's|#net.ipv4.ip_forward=1|net.ipv4.ip_forward=1|g' /etc/sysctl.conf
+sysctl -p

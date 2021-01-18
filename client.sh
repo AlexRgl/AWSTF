@@ -1,4 +1,4 @@
-
+UTILIZADOR="ana"
 #!/bin/bash -x
 ## Update System
 sudo apt update
@@ -13,5 +13,9 @@ sudo apt install -y xfce4 xfce4-goodies
 sudo apt install -y xrdp chromium-browser filezilla
 ## Add User
 sudo adduser xrdp ssl-cert
+## Create an user
+sudo adduser --disabled-password --gecos "" $UTILIZADOR
+## Change passwd
+sudo sh -c 'echo $UTILIZADOR:Passw0rd | chpasswd'
 ## isso
-echo xfce4-session > ~/.xsession
+sudo echo xfce4-session > /home/$UTILIZADOR/.xsession
