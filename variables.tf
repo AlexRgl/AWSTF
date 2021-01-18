@@ -36,10 +36,6 @@ variable "volume_tags1" {
   }
 }
 
-
-
-
-
 variable "sec_group_name" {
   default = "TF-GROUP"
 }
@@ -47,8 +43,13 @@ variable "sec_group_name" {
 variable "sec_group_description" {
   default = "TF-GROUP"
 }
-variable "user_data" {
-  default = "./cloud-config.sh"
+
+variable "SRV" {
+  default = "./server.sh"
+}
+
+variable "CLI" {
+  default = "./client.sh"
 }
 
 variable "volume_size" {

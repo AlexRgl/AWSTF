@@ -13,7 +13,7 @@ resource "aws_instance" "instance" {
   root_block_device {
     volume_size = var.volume_size
   }
-  user_data = filebase64(var.user_data)
+  user_data = filebase64(var.server)
 }
 
 
@@ -32,7 +32,7 @@ resource "aws_instance" "instance1" {
   root_block_device {
     volume_size = var.volume_size
   }
-  user_data = filebase64(var.user_data)
+  user_data = filebase64(var.CLI)
 }
 
 resource "aws_security_group" "instance" {
