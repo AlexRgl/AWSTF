@@ -81,4 +81,18 @@ chgrp ssl-cert /etc/ssl/private/ca.key
 cp pki/private/amazonaws.com.key /etc/ssl/private
 chmod g+r /etc/ssl/private/amazonaws.com.key
 chgrp ssl-cert /etc/ssl/private/amazonaws.com.key
-cd $CURRENTDIR
+## Change certificates Apache2
+cd /etc/apache2/sites-available
+sudo sed -i 's|ssl-cert-snakeoil.pem|amazonaws.com.crt.com|g' /etc/apache2/sites-available/default-ssl.conf
+sudo sed -i 's|ssl-cert-snakeoil.key|amazonaws.com.key.com|g' /etc/apache2/sites-available/default-ssl.conf
+## Put Certificates on Apache2 for download
+cp /etc/easy-rsa/easyrsa3/pki/ca.crt /var/www/html
+cp /etc/easy-rsa/easyrsa3/pki/issued/amazonaws.com.crt /var/www/html
+cp /etc/easy-rsa/easyrsa3/pki/issued/client.amazonaws.com.crt /var/www/html
+cp /etc/easy-rsa/easyrsa3/pki/private/amazonaws.com.key /var/www/html
+cp /etc/easy-rsa/easyrsa3/pki/private/client.amazonaws.com.key /var/www/html
+cp /etc/easy-rsa/easyrsa3/pki/private/client.amazonaws.com.p12 /var/www/html
+## Change permissions and remove the index
+chmod -R +r /var/www/html
+rm /var/www/html/index.html
+## 
