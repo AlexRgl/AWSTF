@@ -6,8 +6,8 @@ variable "tags" {
   type = map(string)
   default = {
     Ano = "2021"
-    Curso = "GRSI"
-    Name = "GRSI"
+    Curso = "Server"
+    Name = "Server"
   }
 }
 
@@ -15,7 +15,7 @@ variable "volume_tags" {
   type = map(string)
   default = {
     Ano = "2021"
-    Curso = "GRSI"
+    Curso = "Server"
   }
 }
 
@@ -23,16 +23,16 @@ variable "tags1" {
   type = map(string)
   default = {
     Ano = "2021"
-    Curso = "GRSI1"
-    Name = "GRSI1"
+    Curso = "CLIENTE"
+    Name = "CLIENTE"
   }
 }
 
 variable "volume_tags1" {
   type = map(string)
   default = {
-    Ano = "2021"
-    Curso = "GRSI1"
+    Ano = "CLIENTE"
+    Curso = "CLIENTE"
   }
 }
 
