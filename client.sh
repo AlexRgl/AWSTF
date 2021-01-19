@@ -1,5 +1,5 @@
-UTILIZADOR="ana"
 #!/bin/bash -x
+UTILIZADOR="ana"
 ## Update System
 sudo apt update
 sudo apt -y upgrade
