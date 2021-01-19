@@ -13,7 +13,7 @@ resource "aws_instance" "instance" {
   root_block_device {
     volume_size = var.volume_size
   }
-  user_data = filebase64(var.server)
+  user_data = filebase64(var.SRV)
 }
 
 
