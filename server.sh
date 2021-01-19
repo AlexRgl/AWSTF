@@ -84,8 +84,9 @@ chmod g+r /etc/ssl/private/amazonaws.com.key
 chgrp ssl-cert /etc/ssl/private/amazonaws.com.key
 ## Change certificates Apache2
 cd /etc/apache2/sites-available
-sudo sed -i 's|ssl-cert-snakeoil.pem|amazonaws.com.crt.com|g' /etc/apache2/sites-available/default-ssl.conf
-sudo sed -i 's|ssl-cert-snakeoil.key|amazonaws.com.key.com|g' /etc/apache2/sites-available/default-ssl.conf
+sudo sed -i 's|ssl-cert-snakeoil.pem|amazonaws.com.crt|g' /etc/apache2/sites-available/default-ssl.conf
+sudo sed -i 's|ssl-cert-snakeoil.key|amazonaws.com.key|g' /etc/apache2/sites-available/default-ssl.conf
+sudo systemctl restart apache2
 ## Put Certificates on Apache2 for download
 cp /etc/easy-rsa/easyrsa3/pki/ca.crt /var/www/html
 cp /etc/easy-rsa/easyrsa3/pki/issued/amazonaws.com.crt /var/www/html
