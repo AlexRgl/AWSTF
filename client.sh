@@ -19,4 +19,3 @@ sudo adduser --disabled-password --gecos "" $UTILIZADOR
 sudo echo "$UTILIZADOR:Passw0rd"|chpasswd
 ## isso
 sudo echo xfce4-session > /home/$UTILIZADOR/.xsession
-##dasd
