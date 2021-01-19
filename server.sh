@@ -1,9 +1,13 @@
+PORTNON="8080"
+PORTSSL="8443"
+PASS="Passw0rd"
+USER="maria"
 #!/bin/bash -x
 ## Update System
 sudo apt update
 sudo apt -y upgrade
 ## Change Root password
-sudo sh -c 'echo root:Passw0rd | chpasswd'
+sudo sh  "echo root:$PASS | chpasswd"
 ## Change Hostname
 sudo hostnamectl set-hostname Server
 ## Install utilitaries
@@ -17,9 +21,9 @@ sudo a2ensite default-ssl.conf
 sudo systemctl restart apache2
 sudo systemctl enable apache2
 ## Configure to port 8080 and 8443
-sudo sed -i 's|80|8080|g' /etc/apache2/ports.conf
-sudo sed -i 's|443|8443|g' /etc/apache2/ports.conf
-sudo sed -i 's|443|8443|g' /etc/apache2/sites-available/default-ssl.conf
+sudo sed -i "s|80|$PORTNON|g" /etc/apache2/ports.conf
+sudo sed -i "s|443|$PORTSSL|g" /etc/apache2/ports.conf
+sudo sed -i "s|443|$PORTSSL|g" /etc/apache2/sites-available/default-ssl.conf
 ## Restart Again
 sudo systemctl restart apache2
 ## Install ssl-certs
@@ -69,7 +73,7 @@ cd /etc/easy-rsa/easyrsa3
   --subject-alt-name="DNS:*.amazonaws.com" \
   build-client-full client.amazonaws.com nopass
 ## Create P12
-echo "Passw0rd" > /tmp/P12Password
+echo "$PASS" > /tmp/P12Password
 ./easyrsa --passout=file:/tmp/P12Password export-p12 client.amazonaws.com
 ## Copy the certificates
 cp pki/ca.crt /etc/ssl/certs
